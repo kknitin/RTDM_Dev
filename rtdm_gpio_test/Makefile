@@ -1,12 +1,11 @@
 export LD_LIBRARY_PATH=/usr/xenomai/lib
-PERIOD:= 1
 XENO_CONFIG = /usr/xenomai/bin/xeno-config
-CFLAGS := $(shell $(XENO_CONFIG) --alchemy --cflags)
-LDFLAGS := $(shell $(XENO_CONFIG) --alchemy --ldflags) 
+CFLAGS := $(shell $(XENO_CONFIG) --posix --cflags)
+LDFLAGS := $(shell $(XENO_CONFIG) --posix --ldflags) 
 CC := $(shell $(XENO_CONFIG) --cc)
 
-FILES = periodic.c
-EXECUTABLE = periodic_test
+FILES = gpio_ptask.c gpio_task.h
+EXECUTABLE = gpio_ptask
 
 #LDFLAGS+= -lrtdk
 build: $(FILES)

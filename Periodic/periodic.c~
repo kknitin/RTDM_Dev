@@ -1,17 +1,13 @@
 #include <stdio.h>
 #include <signal.h>
 #include <stdlib.h>
-
+#include <unistd.h>
 #include <sys/mman.h>
 #include <task.h>
 #include <timer.h>
-
-#include <rtdm/rtdm.h>
-
 RT_TASK demo_task;
 
-
-void rt_thread(void *arg)
+void demo(void *arg)
 {
 		int x,i, ret,cnt = 0;
         RTIME now, previous;
@@ -64,16 +60,10 @@ void rt_thread(void *arg)
 						 
         }
 }
-
 void catch_signal(int sig)
 {
 	exit(0);
 }
-
-
-
-
-
 int main(int argc, char* argv[])
 {		
 		int i = atoi (argv[1]);
@@ -86,8 +76,6 @@ int main(int argc, char* argv[])
         signal(SIGINT, catch_signal);
         /* Avoids memory swapping for this program */
         mlockall(MCL_CURRENT|MCL_FUTURE);
-
-
         /*
          * Arguments: &task,
          *            name,
@@ -102,7 +90,7 @@ int main(int argc, char* argv[])
          *            task function,
          *            function argument
          */
-        rt_task_start(&demo_task, &rt_thread, NULL);
+        rt_task_start(&demo_task, &demo, NULL);
         pause();
         rt_task_delete(&demo_task);
         return 0;

@@ -1,4 +1,3 @@
-export LD_LIBRARY_PATH=/usr/xenomai/lib
 XENO_CONFIG = /usr/xenomai/bin/xeno-config
 CFLAGS := $(shell $(XENO_CONFIG) --posix --cflags)
 LDFLAGS := $(shell $(XENO_CONFIG) --posix --ldflags) 
@@ -14,7 +13,4 @@ clean:
 	rm -f $(EXECUTABLE)
 	
 rebuild: clean build
-
-run:
-	./$(EXECUTABLE)
 
