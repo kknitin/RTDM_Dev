@@ -6,7 +6,7 @@ CC = gcc
 CFLAGS  = -g -Wall -lmraa
 
 # # the build target executable:
-TARGET = Gpiotest
+TARGET = gpiotest
 
 all: $(TARGET)
 
@@ -14,4 +14,3 @@ $(TARGET): $(TARGET).c
 	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
 clean:
 	$(RM) $(TARGET)
-
